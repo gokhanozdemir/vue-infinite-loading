@@ -46,9 +46,7 @@
               for (var i = this.list.length; i <= this.list.length + 10; i++) {
                 temp.push(i);
               }
-
               this.list = this.list.concat(temp);
-              this.$refs.infiniteLoading.$emit('$InfiniteLoading:loaded');
             }.bind(this), 1000);
           }
         }

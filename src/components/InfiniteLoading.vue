@@ -57,6 +57,17 @@
     return distance;
   }
 
+  function setDistanceOnce (elm, dir) {
+    let distance;
+    const scrollTop = isNaN(elm.scrollTop) ? elm.pageYOffset : elm.scrollTop;
+    if (dir === 'top') {
+      distance = scrollTop;
+    } else {
+      distance = this.$el.offsetTop;
+    }
+    return distance;
+  }
+
   export default {
     data() {
       return {
@@ -65,6 +76,7 @@
         isLoading: false,
         isComplete: false,
         isFirstLoad: true, // save the current loading whether it is the first loading
+        loaderDistance: 0,
       };
     },
     computed: {
@@ -90,6 +102,11 @@
       this.scrollHandler = function scrollHandlerOriginal() {
         if (!this.isLoading) {
           this.attemptLoad();
+        } else if (this.isLoading) {
+          if (this.loaderDistance !== setDistanceOnce.bind(this)(this.scrollParent, this.direction)) {
+            this.$emit('$InfiniteLoading:loaded')
+            this.loaderDistance = setDistanceOnce.bind(this)(this.scrollParent, this.direction)
+          };
         }
       }.bind(this);
 
