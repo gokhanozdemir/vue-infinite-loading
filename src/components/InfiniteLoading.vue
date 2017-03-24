@@ -150,7 +150,7 @@
     },
   };
 </script>
-<style lang="less" scoped>
+<!--<style lang="less" scoped>
   @import '../styles/spinner';
 
   .infinite-loading-container{
@@ -174,4 +174,60 @@
     text-align: center;
     padding: 10px 0;
   }
+</style>-->
+<style scoped>
+div {
+  color: red;
+}
+.loading-default {
+  position: relative;
+  border: 1px solid #999;
+  animation: ease loading-rotating 1.5s infinite;
+}
+.loading-default:before {
+  content: '';
+  position: absolute;
+  display: block;
+  top: 0;
+  left: 50%;
+  margin-top: -3px;
+  margin-left: -3px;
+  width: 6px;
+  height: 6px;
+  background-color: #999;
+  border-radius: 50%;
+}
+.loading-spiral {
+  border: 2px solid #777;
+  border-right-color: transparent;
+  animation: linear loading-rotating 0.85s infinite;
+}
+@keyframes loading-rotating {
+  0% {
+    transform: rotate(0);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+.infinite-loading-container {
+  clear: both;
+  text-align: center;
+}
+.infinite-loading-container *[class^=loading-] {
+  display: inline-block;
+  margin: 15px 0;
+  width: 28px;
+  height: 28px;
+  font-size: 28px;
+  line-height: 28px;
+  border-radius: 50%;
+}
+.infinite-status-prompt {
+  color: #666;
+  font-size: 14px;
+  text-align: center;
+  padding: 10px 0;
+}
+
 </style>
